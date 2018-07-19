@@ -22,7 +22,9 @@ counter(); // prints 3
 ## Installation
 The `out` directory contains class files with `Zeta` as the main class.
 `buildlinux.s` is a loose script written for Linux systems : 
-`$ [sudo] sh buildlinux.sh`
+* `$ git clone https://github.com/mirimmad/zeta-lang.git`
+* `$ cd zeta-lang`
+* `$ [sudo] sh buildlinux.sh`
 
 ## TO-DO
 * Library Support - Zeta currently does not support external libraries.
