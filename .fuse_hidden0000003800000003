@@ -1,1 +1,0 @@
-rlwrap java -cp out zeta.Zeta $@
