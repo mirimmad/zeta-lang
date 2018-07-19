@@ -1,0 +1,1 @@
+java -classpath %SystemDrive%/zeta zeta.Zeta %*
