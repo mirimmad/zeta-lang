@@ -21,10 +21,19 @@ counter(); // prints 3
 
 ## Installation
 The `out` directory contains class files with `Zeta` as the main class.
+
 `buildlinux.sh` is a loose script written for Linux systems : 
 * `$ git clone https://github.com/mirimmad/zeta-lang.git`
 * `$ cd zeta-lang`
 * `$ [sudo] sh buildlinux.sh`
+
+To install on Windows:
+* `git clone https://github.com/mirimmad/zeta-lang.git`
+* `cd zeta-lang`
+* Run `installwindows.bat`
+
+To remove on Windows:
+* Run `removewindows.bat`
 
 ## TO-DO
 * Library Support - Zeta currently does not support external libraries.
