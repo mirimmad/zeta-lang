@@ -43,7 +43,7 @@ public class Zeta {
 
     private static void runPrompt() {
         System.out.println("The \u001B[33mZeta\033[0m Programming Language 0.1");
-        System.out.println("Copyright \u001B[36mMir Immad\033[0m 2017.\n");
+        System.out.println("Copyright \u001B[36mMir Immad\033[0m 2018.\n");
         try{
         InputStreamReader input = new InputStreamReader(System.in);
         BufferedReader reader = new BufferedReader(input);
