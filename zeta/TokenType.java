@@ -1,0 +1,20 @@
+package zeta;
+enum TokenType {
+    //Single-character Tokens
+    LEFT_PAREN, RIGHT_PAREN, LEFT_BRACE, RIGHT_BRACE, COMMA, DOT, MINUS, PLUS, SEMICOLON, SLASH, STAR,
+
+    //one or two character Tokens
+
+    BANG, BANG_EQUAL, GREATER, GREATER_EQUAL, LESS, LESS_EQUAL, EQUAL, EQUAL_EQUAL,
+
+    //Literals
+    IDENTIFIER, NUMBER, STRING,
+
+    //KEYWORDS
+
+    AND, CLASS, ELSE, FALSE, FN, FOR, IF, NIL, OR, PRINT, RETURN, SUPER, THIS, TRUE, LET, WHILE,LOOP, BREAK,
+
+    //End
+    EOF
+
+}
