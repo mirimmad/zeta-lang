@@ -1,6 +1,6 @@
 # Zeta Programming language
 Zeta `0.1` is an imperative programming language made for educational purposes that supports Object Orientation and closures among other modern features.
-* Zeta is dynamically types
+* Zeta is dynamically typed
 * Zeta has tight lexical scoping
 ###  How code looks like
 ~~~~
@@ -21,7 +21,7 @@ counter(); // prints 3
 
 ## Installation
 The `out` directory contains class files with `Zeta` as the main class.
-`buildlinux.s` is a loose script written for Linux systems : 
+`buildlinux.sh` is a loose script written for Linux systems : 
 * `$ git clone https://github.com/mirimmad/zeta-lang.git`
 * `$ cd zeta-lang`
 * `$ [sudo] sh buildlinux.sh`
