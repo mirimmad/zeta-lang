@@ -278,7 +278,7 @@ class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void>{
                     left = stringfy(left);
                     return (String) left + (String) right;
                 }
-                throw new RuntimeError(expr.operator, "Operators mut me numbers or strings");
+                throw new RuntimeError(expr.operator, "Operands must me numbers or strings");
             case GREATER:
                 checkNumberOperands(expr.operator, left, right);
                 return (double) left > (double) right;
