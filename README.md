@@ -26,12 +26,14 @@ The `out` directory contains class files with `Zeta` as the main class.
 * `$ git clone https://github.com/mirimmad/zeta-lang.git`
 * `$ cd zeta-lang`
 * `$ [sudo] sh buildlinux.sh`
-* To fire up the REPL type `zeta` or you can `zeta script.zt`
+* `$ zeta` or `$ zeta script.zt`
+
 To install on Windows:
 * `git clone https://github.com/mirimmad/zeta-lang.git`
 * `cd zeta-lang`
 * Run `installwindows.bat`
-* To fire up the REPL type `zeta` or you can `zeta script.zt`
+* `zeta` or `zeta script.zt`
+
 To remove on Windows:
 * Run `removewindows.bat`
 
