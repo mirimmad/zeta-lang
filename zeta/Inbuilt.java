@@ -7,6 +7,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Date;
 import java.util.Random;
+import java.lang.Math;
 
 class Inbuilt {
     public static Map<String, ZetaCallable> inBuilts  = new HashMap<>();
@@ -74,10 +75,27 @@ class Inbuilt {
             if(arguments.get(0) instanceof Double) {
                 number = rand.nextInt(((Double)arguments.get(0)).intValue());
             } else {
-                return "Input must be a number.";
+                return "random : argument must be a number.";
             }
             return number;
         }
+    });
+    
+    inBuilts.put("sqrt", new ZetaCallable(){
+    	@Override
+    	public int arity() {
+    		return 1;
+    	}
+    	@Override
+    	public Object call(Interpreter interpreter, List<Object> arguments) {
+    		Double numSqrt;
+    		if(arguments.get(0) instanceof Double) {
+    			numSqrt = Math.sqrt((Double)arguments.get(0));
+    		} else {
+    			return "sqrt : argument must be a number";
+    		}
+    		return numSqrt;
+    	}
     });
  }
 }
