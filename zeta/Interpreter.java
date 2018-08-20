@@ -354,7 +354,7 @@ class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void>{
     }
     private boolean isEqual(Object left, Object right) {
         if(left == null && right == null) return true;
-        if(left == null) return false;
+        if(left == null || right == null) return false;
         return left.equals(right);
     }
     private boolean isTruthy(Object object) {
