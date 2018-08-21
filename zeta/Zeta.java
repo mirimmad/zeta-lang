@@ -3,7 +3,7 @@ package zeta;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
-import java.io.FileNotFoundException;
+import java.nio.file.NoSuchFileException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -31,10 +31,10 @@ public class Zeta {
             byte[] bytes = Files.readAllBytes(Paths.get(path));
             run(new String(bytes, Charset.defaultCharset()));
             if(hadError) System.exit(65);
-            } catch(FileNotFoundException e) {
+            } catch(NoSuchFileException e) {
                 System.out.println(path + ": File not Found");
             } catch(IOException e) {
-                System.out.println(e.getMessage() + "hah");
+                System.out.println(e.getMessage());
             }
         } else {
             System.err.println("Zeta scripts must end with '.zt'.");
