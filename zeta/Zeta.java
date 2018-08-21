@@ -14,7 +14,7 @@ public class Zeta {
     public static boolean hadRuntimeError = false;
     private static final Interpreter interpreter = new Interpreter();
     public static void main(String[] args) {
-            
+
             if(args.length > 1) {
                 System.out.println("Usage zeta [Script.zt]");
             } else if (args.length == 1) {
@@ -22,7 +22,7 @@ public class Zeta {
             } else {
                 runPrompt();
             }
-             
+
     }
 
     private static void runFile(String path) {
@@ -34,7 +34,7 @@ public class Zeta {
             } catch(FileNotFoundException e) {
                 System.out.println(path + ": File not Found");
             } catch(IOException e) {
-                System.out.println(e.getMessage());
+                System.out.println(e.getMessage() + "hah");
             }
         } else {
             System.err.println("Zeta scripts must end with '.zt'.");
@@ -51,7 +51,7 @@ public class Zeta {
             System.out.print(">> ");
             run(reader.readLine());
             hadError = false;
-         }   
+         }
         } catch(IOException e) {
             System.err.println(e.getMessage());
         }
@@ -67,7 +67,7 @@ public class Zeta {
         resolver.resolve(statements);
         if(hadError) return;
         interpreter.interpret(statements);
-        
+
     }
 
     static void error(int line, String message) {
@@ -91,4 +91,9 @@ public class Zeta {
         System.err.println(error.getMessage() + "\n[line " + error.token.line + "]");
         hadRuntimeError = true;
     }
+
+    
+
+
+
 }
