@@ -20,16 +20,12 @@ class Inbuilt {
         }
         @Override
         public Object call(Interpreter interpreter, List<Object> arguments) {
-            int number;
-            Scanner scanner = new Scanner(System.in);
             try {
-                  number = scanner.nextInt();
-                } catch(InputMismatchException e) {
-                    return e.getMessage();
-                }
-                return number;
+                return (new Scanner(System.in)).nextInt();
+            } catch(InputMismatchException e) {
+                return e.getMessage();
             }
-        
+        }
     }); 
 
     inBuilts.put("readString", new ZetaCallable(){
@@ -39,14 +35,11 @@ class Inbuilt {
         }
         @Override
         public Object call(Interpreter interpreter, List<Object> arguments) {
-            String str;
-            Scanner scanner =  new Scanner(System.in);
             try{
-                str = scanner.next();
+                return (new Scanner(System.in)).next();
             } catch(InputMismatchException e) {
                 return e.getMessage();
             }
-            return str;
         }
     });
     
@@ -71,13 +64,10 @@ class Inbuilt {
         @Override
         public Object call(Interpreter interpreter, List<Object> arguments) {
             Random rand = new Random();
-            int number;
             if(arguments.get(0) instanceof Double) {
-                number = rand.nextInt(((Double)arguments.get(0)).intValue());
-            } else {
-                return "random : argument must be a number.";
+                return rand.nextInt(((Double)arguments.get(0)).intValue());
             }
-            return number;
+            return "random : argument must be a number.";
         }
     });
     
@@ -88,13 +78,10 @@ class Inbuilt {
     	}
     	@Override
     	public Object call(Interpreter interpreter, List<Object> arguments) {
-    		Double numSqrt;
     		if(arguments.get(0) instanceof Double) {
-    			numSqrt = Math.sqrt((Double)arguments.get(0));
-    		} else {
-    			return "sqrt : argument must be a number";
+    			return Math.sqrt((Double)arguments.get(0));
     		}
-    		return numSqrt;
+            return "sqrt : argument must be a number";
     	}
     });
  }
