@@ -20,15 +20,18 @@ class Inbuilt {
         }
         @Override
         public Object call(Interpreter interpreter, List<Object> arguments) {
-            int number;
+            String number;
             Scanner scanner = new Scanner(System.in);
             try {
-                  number = scanner.nextInt();
+                  number = scanner.next();
                 } catch(InputMismatchException e) {
                     return e.getMessage();
                 }
-                return number;
+                return Double.parseDouble(number);
             }
+            public String toString() {
+            return "zeta inbuilt";
+        }
         
     }); 
 
@@ -48,6 +51,9 @@ class Inbuilt {
             }
             return str;
         }
+        public String toString() {
+            return "zeta inbuilt";
+        }
     });
     
     inBuilts.put("date", new ZetaCallable(){
@@ -59,6 +65,9 @@ class Inbuilt {
         @Override
         public Object call(Interpreter interpreter, List<Object> arguments) {
             return new Date();
+        }
+        public String toString() {
+            return "zeta inbuilt";
         }
     });
     
@@ -79,6 +88,9 @@ class Inbuilt {
             }
             return number;
         }
+        public String toString() {
+            return "zeta inbuilt";
+        }
     });
     
     inBuilts.put("sqrt", new ZetaCallable(){
@@ -96,6 +108,49 @@ class Inbuilt {
     		}
     		return numSqrt;
     	}
+    	public String toString() {
+            return "zeta inbuilt";
+        }
+    });
+    
+    inBuilts.put("type", new ZetaCallable(){
+        @Override
+        public int arity() {
+            return 1;
+        }
+        
+        @Override
+        public Object call(Interpreter interpret, List<Object> arguments) {
+            Object arg = arguments.get(0);
+            if (arg instanceof Double) {
+                return "number";
+            }
+           
+            if (arg instanceof String) {
+                return "string";
+            }           
+            
+            if (arg instanceof ZetaCallable && arg instanceof ZetaClass) {
+                ZetaClass z = (ZetaClass) arg;
+                return z.name;
+            }
+            
+            if (arg instanceof ZetaCallable && arg instanceof ZetaFunction) {
+                return "function";
+            }
+            if (arg instanceof ZetaCallable) {
+                return "inbuillt";
+            }
+            if (arg instanceof ZetaInstance) {
+                return "instance";
+            }
+            return "undefined";
+        }
+        
+        public String toString() {
+            return "zeta inbuilt";
+        }
+    
     });
  }
 }

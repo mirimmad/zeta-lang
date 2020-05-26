@@ -278,4 +278,12 @@ class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
         isInLoop = enclosignLoop;
         return null;
     }
+    
+    @Override
+    public Void visitImportStmt(Stmt.Import stmt) {
+       //resolveLocal(stmt.module);
+       
+       return null;
+    }
+    
  }

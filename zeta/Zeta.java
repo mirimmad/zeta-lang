@@ -12,7 +12,7 @@ import java.util.List;
 public class Zeta {
     public static boolean hadError = false;
     public static boolean hadRuntimeError = false;
-    private static final Interpreter interpreter = new Interpreter();
+  
     public static void main(String[] args) {
 
             if(args.length > 1) {
@@ -29,7 +29,7 @@ public class Zeta {
         if(path.endsWith(".zt")) {
             try {
             byte[] bytes = Files.readAllBytes(Paths.get(path));
-            run(new String(bytes, Charset.defaultCharset()));
+            run(new String(bytes, Charset.defaultCharset()), false);
             if(hadError) System.exit(65);
             } catch(NoSuchFileException e) {
                 System.out.println(path + ": File not Found");
@@ -49,7 +49,7 @@ public class Zeta {
         BufferedReader reader = new BufferedReader(input);
         for(;;) {
             System.out.print(">> ");
-            run(reader.readLine());
+            run(reader.readLine(), true);
             hadError = false;
          }
         } catch(IOException e) {
@@ -57,16 +57,17 @@ public class Zeta {
         }
     }
 
-    private static void run(String source) {
+    private static void run(String source, Boolean areWeInPrompt) {
         Lexer lexer = new Lexer(source);
         List<Token> tokens = lexer.scanTokens();
-        Parser parser = new Parser(tokens);
+        Parser parser = new Parser(tokens, areWeInPrompt);
         List<Stmt> statements = parser.parse();
         if(hadError) return;
+        Interpreter interpreter = new Interpreter(statements);
         Resolver resolver = new Resolver(interpreter);
         resolver.resolve(statements);
         if(hadError) return;
-        interpreter.interpret(statements);
+        interpreter.interpret(areWeInPrompt);
 
     }
 

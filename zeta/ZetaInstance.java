@@ -28,6 +28,7 @@ class ZetaInstance {
 
     @Override
     public String toString() {
+      
         return klass.name + " instance";
     }
 }

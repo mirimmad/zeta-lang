@@ -4,22 +4,30 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void>{
     
     final Environment globals = new Environment();
     private final Map<Expr, Integer> locals = new HashMap<>();
     private Environment environment = globals;
-    
-    Interpreter() {
+    private  Boolean prompt;
+    private Map<String, Interpreter> modules = new HashMap<>();
+    private List<Stmt> statements;
+    Interpreter(List<Stmt> stmts /*for import to work*/) {
+        statements = stmts;
         if(! Inbuilt.inBuilts.isEmpty()) {
             for(String key : Inbuilt.inBuilts.keySet()) {
                 globals.define(key, Inbuilt.inBuilts.get(key));
             }
         }
+        globals.define("hi", null);
     }
 
-    void interpret(List<Stmt> statements) {
+    void interpret(Boolean p) {
+      
+        prompt = p;
         try{
             for(Stmt statement : statements) {
                 execute(statement);
@@ -121,10 +129,41 @@ class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void>{
         executeBlock(stmt.statements, new Environment(environment));
         return null;
     }
+    @Override
+    public Void visitImportStmt(Stmt.Import stmt) {
+        globals.define("mm", null);
+        String n = ((String) stmt.module.literal); 
+        String name = n + ".zt";
+        byte[] bytes;
+        try {
+            bytes = Files.readAllBytes(Paths.get(name));
+        } catch (Exception e) {
+            throw new RuntimeError(stmt.module, "Couldn't open the file");
+        }
+        if (modules.containsKey(name)) return null;
+        Lexer l = new Lexer(new String(bytes));
+        List<Token> tokens = l.scanTokens();
+        Parser p = new Parser(tokens, this.prompt);
+        List<Stmt> stmts = p.parse();
+        Interpreter interpreter = new Interpreter(stmts);
+        Resolver r = new Resolver(interpreter);
+        r.resolve(stmts);
+    /*    modules.put(n, interpreter);
+        globals.define(n, null); 
+        environment.define("nn", null);
+        for(String key : globals.values.keySet()) {
+            System.out.println(key);
+        } */
+        return null;
+    }
 
     @Override
     public Void visitExpressionStmt(Stmt.Expression stmt) {
-        evaluate(stmt.expression);
+        if(prompt) {
+        System.out.println(stringfy(evaluate(stmt.expression)));
+        } else {
+            evaluate(stmt.expression);
+        }
         return null;
     }
 
@@ -185,7 +224,7 @@ class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void>{
         }
         return null;
     }
-
+      
     @Override
     public Object visitAssignExpr(Expr.Assign expr) {
         Object value = evaluate(expr.value);

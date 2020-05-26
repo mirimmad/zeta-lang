@@ -11,8 +11,10 @@ class Parser {
     private static class ParserError extends RuntimeException{}
     private final List<Token> tokens;
     private int current = 0;
-
-    Parser(List<Token> tokens) {
+    private Boolean inPrompt;
+    
+    Parser(List<Token> tokens, Boolean inPrompt) {
+        this.inPrompt = inPrompt;
         this.tokens = tokens;
     }
     List<Stmt> parse() {
@@ -97,10 +99,17 @@ class Parser {
         if(match(WHILE)) return whileStatemnt();
         if(match(FOR)) return forStatement();
         if(match(IF)) return ifStatement();
+        if(match(IMPORT)) return importStatememnt();
         if(match(LEFT_BRACE)) return new Stmt.Block(block());
         return expressionStatement();
     }
-
+    
+    private Stmt importStatememnt() {
+        consume(STRING, "Expect module name after import.");
+        Token name = previous();
+        consume(SEMICOLON, "Expect ';' after module name.");
+        return new Stmt.Import(name);
+    }
     private Stmt forStatement() {
         consume(LEFT_PAREN, "Expect '(' after  for.");
         Stmt initializer = null;

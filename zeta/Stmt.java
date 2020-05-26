@@ -14,6 +14,7 @@ abstract class Stmt {
     R visitVarStmt(Var stmt);
     R visitWhileStmt(While stmt);
     R visitBreakStmt(Break stmt);
+    R visitImportStmt(Import stmt);
   }
   static class Block extends Stmt {
     Block(List<Stmt> statements) {
@@ -140,6 +141,19 @@ abstract class Stmt {
 
     final Expr condition;
     final Stmt body;
+  }
+  
+  static class Import extends Stmt {
+    Import(Token module) {
+        this.module = module;
+    }
+    
+     <R> R accept(Visitor<R> visitor) {
+      return visitor.visitImportStmt(this);
+    }
+
+    final Token module;
+    
   }
 
   abstract <R> R accept(Visitor<R> visitor);
