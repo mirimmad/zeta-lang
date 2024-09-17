@@ -41,6 +41,4 @@ To remove on Windows:
 * Library Support - Zeta currently does not support external libraries.
 * Replacement of Tree Walking interpreter by a VM.
 * Optimizations .
-### Contact
-[Twitter](http://twitter.com/1madmir)
 
